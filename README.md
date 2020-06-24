@@ -10,10 +10,17 @@ k create ns hadoop
 k apply -f cdh.yaml
 ```
 
-Exec into CDH container
+Once the pod is up, check NameNode UI:
 ```
-k get pods -n hadoop
-k exec -ti hadoop-master-xxxxx-xxxxx bash
+k -n hadoop get pods
+k -n hadoop port-forward hadoop-master-xxxxx-xxxxx 50070
+```
+Navigate to [http://localhost:50070](http://localhost:50070) to see the UI.
+
+Exec into CDH container:
+```
+k -n hadoop get pods
+k -n hadoop exec -ti hadoop-master-xxxxx-xxxxx bash
 ```
 
 ### Create some dummy data
