@@ -88,4 +88,4 @@ EXPOSE 9083 10000
 # SOCKS port
 EXPOSE 1180
 
-CMD supervisord -c /etc/supervisord.conf
+COPY entrypoint.sh /entrypoint.sh

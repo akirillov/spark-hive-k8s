@@ -74,14 +74,15 @@ spec:
       labels:
         app: hadoop
     spec:
-      hostAliases:
-      - ip: "127.0.0.1"
-        hostnames:
-        - "hadoop-master.hadoop"
-        - "hadoop-master.hadoop.svc.cluster.local"
       containers:
       - name: hadoop
         image: akirillov/hive:cdh1.16
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        command: ["bash", "/entrypoint.sh"]
         ports:
         # HDFS ports
         - containerPort: 1004

@@ -39,13 +39,15 @@ Create some tables in Hive
 ```
 beeline
 
-!connect jdbc:hive2://hadoop-master.hadoop:10000/default hive hive <-- connecting as 'hive' user
+-- connecting as 'hive' user
+!connect jdbc:hive2://hadoop-master.hadoop:10000/default hive hive
 
 create table hive(id int, value string);
 insert into hive values(1, 'hive');
 select * from hive;
 
-!connect jdbc:hive2://hadoop-master.hadoop:10000/default anonymous anonymous <-- connecting as 'anonymous' user
+-- connecting as 'anonymous' user
+!connect jdbc:hive2://hadoop-master.hadoop:10000/default anonymous anonymous
 
 create table anon(id int, value string);
 insert into anon values(1, 'anon');
@@ -55,7 +57,7 @@ select * from anon;
 
 Verify the data is in HDFS:
 ```
-hdfs dfs -ls /user/hive/warehouse
+hdfs dfs -ls -R /user/hive/warehouse
 Found 2 items
 drwxrwxrwt   - anonymous supergroup          0 2020-06-24 01:20 /user/hive/warehouse/anon
 drwxrwxrwt   - hive      supergroup          0 2020-06-24 01:19 /user/hive/warehouse/hive
