@@ -78,6 +78,8 @@ spec:
       - name: hadoop
         image: akirillov/hive:cdh1.16
         env:
+        - name: HIVE_DO_AS
+          value: "false"
         - name: POD_IP
           valueFrom:
             fieldRef:
