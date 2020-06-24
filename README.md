@@ -94,5 +94,25 @@ Checking tables:
 sc.setLogLevel("INFO")
 
 spark.sharedState.externalCatalog.listTables("default")
+
 spark.table("hive").show
 ```
+
+Reading data from HDFS:
+```
+val df = spark.read.csv("hdfs://hadoop-master.hadoop.svc.cluster.local:9000/test/demo.csv")
+df.show
+```
+
+Save results to Hive and query with Spark SQL:
+```
+df.write.mode("overwrite").saveAsTable("demo_data")
+
+spark.sql("select * from demo_data").show()
+```
+
+Check the data in HDFS (go back to HDFS/Hive container):
+```
+hdfs dfs -ls -R /user/hive/warehouse
+```
+Note: the new table files are owned by the user of Spark ('root')
